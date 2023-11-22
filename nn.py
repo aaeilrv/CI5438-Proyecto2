@@ -35,7 +35,7 @@ class NN(object):
         for i in range(len(self.weights)):
             Yh = np.dot(self.weights[i], Yh) + self.biases[i]
             hidden_Y.append(Yh)
-            if i != len(self.weights) -1: Yh = g(Yh)
+            Yh = g(Yh)
             hidden_activated_Y.append(Yh)
         return hidden_Y, hidden_activated_Y
 
@@ -84,10 +84,14 @@ class NN(object):
     #funcion para entrenar al modelo en base a una serie de modelos, tasa de aprendizaje, 
     #y limites de iteracion y error
     def train(self, examples, learning_rate, max_iteration, min_error):
+        error_rates = []
         for i in range(max_iteration):
-            if self.error_rate(examples) <= min_error: break
+            error =  self.error_rate(examples)
+            error_rates.append(error)
+            if error<= min_error: break
             self.backpropagation(examples, learning_rate)
             #print(self.error_rate(examples))
+        return error_rates
 
     #funcion que guarda el modelo actual en un archivo de texto
     def save_weights(self, filename):
