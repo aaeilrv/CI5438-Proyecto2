@@ -12,8 +12,7 @@ def gprime(X):
     return g(X)*(1-g(X))
 
 class NN(object):
-
-    #el parametro de entrada es una lista de enteros, donde cada enterode índice i representa
+    #el parametro de entrada es una lista de enteros, donde cada entero de índice i representa
     #el tamaño de la capa i de la red neuronal. Debe tener al menos dos elementos representando
     #las capas de entrada y salida
     #tambien se puede inicializar con el nombre de un archivo de texto que guarda una lista de pesos
@@ -25,9 +24,8 @@ class NN(object):
             self.weights = [np.random.randn(len_layers[i], len_layers[i-1]) for i in range(1,len(len_layers))]
             self.biases = [np.random.randn(L, 1) for L in len_layers[1:]]
 
-
     #funcion hipótesis de la red neuronal, toma como elemento
-    #un valor de entrada y retorna un valor estimado de salidam,
+    #un valor de entrada y retorna un valor estimado de salida,
     #asi como los valores intermedios de las capas escondidas, tanto los
     #valores originales como los valores resultantes de aplicar la funcion de activacion
     def h(self, X):
@@ -40,24 +38,19 @@ class NN(object):
             if i != len(self.weights) -1: Yh = g(Yh)
             hidden_activated_Y.append(Yh)
         return hidden_Y, hidden_activated_Y
-    
 
     def error_rate(self, examples):
         E = 0
         for ex in examples:
             E += (self.h(ex[0])[1][-1] - ex[1])**2
         return E[0]/len(examples)
-
     
     #funcion que calcula el gradiente de los pesos de la red en base a un
     #valor de entrada X y un valor de salida Y, utilizando la funcion de error
     #cuadrático como función de pérdida
     def gradient_descent(self, X, Y):
-
         hidden_Y, hidden_activated_Y = self.h(X)
-        
         delta = Y - hidden_activated_Y[-1]
-        
         weight_gradient = []
         bias_gradient = []
 
@@ -94,7 +87,7 @@ class NN(object):
         for i in range(max_iteration):
             if self.error_rate(examples) <= min_error: break
             self.backpropagation(examples, learning_rate)
-            print(self.error_rate(examples))
+            #print(self.error_rate(examples))
 
     #funcion que guarda el modelo actual en un archivo de texto
     def save_weights(self, filename):
@@ -103,24 +96,10 @@ class NN(object):
         file.write(json.dumps(data))
         file.close()
 
-    #funcion quer carga el modelo en un archivo de texto
+    #funcion que carga el modelo en un archivo de texto
     def load_weights(self, filename):
         file = open(f"{filename}.txt", "r")
         data = json.loads(file.read())
         self.weights = data.weights
         self.biases = data.biases
         file.close()
-
-
-nn = NN([1, 10, 10, 10, 10, 10, 10, 10, 10, 1])
-
-def f(X):
-    return X*X
-
-examples = [(X, f(X)) for X in [ np.vectorize(lambda x: int(x))(np.random.rand(1,1)*20) for i in range(1000)] ]
-learning_rate = 0.01
-max_iteration = 100000
-min_error = 0.1
-
-nn.train(examples,learning_rate, max_iteration, min_error)
-        
