@@ -1,16 +1,26 @@
-﻿# 2: Iris Dataset
+# 2: Iris Dataset
 ## Clasificadores Binarios
-Se utilizó el dataframe que contiene 150 entradas en total. Este fue dividido en tres partes:
+Se utilizó el dataframe que contiene $150$ entradas en total. Este fue dividido en tres partes:
 * ***iris_setosa***: Valores de Iris Setosa fueron marcados como $1$. Para Iris Versicolor e Iris Virginica fueron marcados como $0$.
 * ***iris_versicolor***:  Valores de Iris Versicolor fueron marcados como $1$. Para Iris Setosa e Iris Virginica fueron marcados como $0$.
 * ***iris_virginica***:  Valores de Iris Virginica fueron marcados como $1$. Para Iris Versicolor e Iris Setosa fueron marcados como $0$.
 
-Luego, cada una de ellas fue a su vez separado en conjuntos de entrenamiento y prueba con una división de 80% y 20% respectivamente.
+Luego, cada una de ellas fue a su vez separado en conjuntos de entrenamiento y prueba con una división de $80%$ y $20%$ respectivamente.
 
-Así, para cada especie, tenemos un conjunto de entrenamiento con 120 valores y uno de prueba con 30 valores.
+Así, para cada especie, tenemos un conjunto de entrenamiento con $120$ valores y uno de prueba con $30$ valores.
+
+Se utilizó un umbral de $0.5$ para determinar el valor arrojado por la capa de salida de la red neuronal calificaba como $0$ o $1$. Es decir, si el valor arrojado estaba en el rango $[0, 0.5)$, se asume como $0$, mientras que si estaba entre $[0.5, 1]$ se asume como $1$.
 
 ### Única Neurona:
-Para cada una de las especies, se realizaron 5 pruebas. A continuación, se expone el error mínimo, máximo y promedio de ellas, así como la cantidad de errores (falsos negativos y falsos positivos) que hubo en total.
+Se utilizaron los siguientes valores:
+* Tasas de aprendizaje: 1e-06, 1e-05, 0.001, 0.01
+* Cantidad máxima de iteraciones: 100000, 10000, 5000, 1000
+
+En total, se crearon siete distintos casos por cada una de las especies del dataframe.
+
+Para calcular el valor mínimo, máximo y promedio de errores, se evaluó cada uno de los casos cinco veces. Es decir, se corrió el algoritmo cinco veces para cada uno de ellos y luego se vió la iteración donde más errores se produjeron, donde menos hubo y el promedio de estas cinco.
+
+En el caso de la tasa de aprendizaje $0.01$, se decidió hacerla con tres distintas cantidades de iteraciones ya que al momento de ejecutarla con $10000$ y ver los datos, nos pudimos dar cuenta de la diferencia de la cantidad de errores entre los casos evaluados previamente y este, por lo que se decidió ver si era posible llegar a mejores resultados con menos iteraciones.
 
 |Especie|Learning  Rate|Max.  Iter|Total  Errores|Min.E.|Max. E.|AVG E.|Total  Falsos  -| Total  Falsos  +
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -43,17 +53,13 @@ Para cada una de las especies, se realizaron 5 pruebas. A continuación, se expo
 |**I.Virginica**|**0.1**|**1000**|8|1|3|1.6|2|5|
 
 Es claro por estos resultados que con la tasa de aprendizaje entre $0.01$ y $0.1$ se logra obtener menos cantidad de errores en cada una de las categorías.
-En el caso de la tasa de aprendizaje de $0.1$ se optó por variar el número máximo de iteraciones a realizar, esto debido a que la tasa es muy grande 
 
-Así, estaremos variando la tasa de aprendizaje en ese intervalo al hacer las pruebas con capas ocultas.
+(hablar hablar hablar)
 
 ### Una Capa Oculta
-Se utilizaron los siguientes valores:
-* Cantidad máxima de iteraciones: 1000, 5000, 10000
-* Tasas de aprendizaje: 0.01, 0.1.
-* Cantidad de neuronas en la capa oculta: 1 - 5.
+Al ver los resultados obtenidos previamente, se decidió optar por sólo dos posibles tasas de aprendizaje: $0.01$ y $0.1$, y conocer los valores resultantes al usar tres cantidades máximas de iteraciones: $1000$, $5000$ y $10000$.
+Debido al tiempo que toma experimentar con mayor cantidad de neuronas en las capas ocultas y los límites que se tenían, se decidió seguir los consejos dados en clase de experimentar hasta con un máximo de cinco neuronas en la capa oculta. Así, se varió la cantidad en el intervalo [1, 5], resultando finalmente $30$ distintos casos evaluados que se pueden observar a continuación:
 
-Así, finalmente se obtuvieron 30 distintos casos. A continuación se presenta la tabla con los valores obtenidos en ellos:
 |Especie |Learning  Rate|Neuronas  en  Capa  Oculta|Max.  Iter|Total  Errores|Min.  E.|Máx  E.|AVG  E.|Total  Falsos  - |Total  Falsos  +|Max.  Iter|Total  Errores|Min.  E.|Máx  E.|AVG  E.|Total  Falsos  - |Total  Falsos  +|Max.  Iter|Total  Errores|Min.  E.|Máx  E.|AVG  E.|Total  Falsos  - |Total  Falsos  +|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |**Iris Setosa**|**0.01** |**1** |**1000** |63 |10 |16 |12.6 |33 |30 |**5000** |50 |1 |13 |10 |50 |0 |**10000** |20 |0 |10 |4 |20 |0 |
