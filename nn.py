@@ -43,7 +43,7 @@ class NN(object):
         E = 0
         for ex in examples:
             E += (self.h(ex[0])[1][-1] - ex[1])**2
-        return E[0,0]/len(examples)
+        return np.linalg.norm(E)/len(examples)
     
     #funcion que calcula el gradiente de los pesos de la red en base a un
     #valor de entrada X y un valor de salida Y, utilizando la funcion de error

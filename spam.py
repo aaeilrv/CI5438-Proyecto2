@@ -94,15 +94,15 @@ def graph_topologies():
 
 def train_model():
 
-    nn = NN(f"spam_train/model4")
+    nn = NN(f"spam_train/model5")
 
     t0 = time()
-    err = nn.train(training_set, 0.00003, 500, 0.1)
+    err = nn.train(training_set, 0.00006, 500, 0.1)
     t1 = time()
     print(t1-t0)
 
-    nn.save_weights("spam_train/model5")
-    file = open(f"spam_train/err5.txt", "w")
+    nn.save_weights("spam_train/model6")
+    file = open(f"spam_train/err6.txt", "w")
     file.write(json.dumps(err))
     file.close()
 
@@ -113,6 +113,7 @@ def train_model():
     #500            0.000005
     #500            0.00002
     #500            0.00003
+    #500            0.00006
 
 
 
