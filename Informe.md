@@ -156,7 +156,7 @@ Se utilizaron los siguientes valores:
 
 ## Clasificadores Multiclase
 
-# 2:  Clasificación de spam
+# 3:  Clasificación de spam
 
 Para el clasificador de spam se normalizaron los datos de las últimas 3 columnas de entrada,  capital_run_length_average, capital_run_length_longest y capital_run_length_total
 
@@ -179,16 +179,19 @@ En la siguiente gráfica se pueden visualizar los resultados
 
 Los 10 menores errores fueron
 
-* d20_w80   0.24188783454962035
-* d40_w20   0.2500841894396112
-* d50_w30   0.251263287441727
-* d70_w10   0.2519126044142899
-* d50_w90   0.25215961688326183
-* d10_w40   0.25218344612988064
-* d60_w90   0.25624042195836866
-* d30_w60   0.256961442645613
-* d40_w70   0.2601737903367856
-* d10_w1    0.2610052077226626
+|Profundidad | Ancho | tasa de error |
+|:----------:|:-----------------:|:---------:|
+|**20**|**80**|0.24188783454962035|
+|**40**|**20**|0.2500841894396112|
+|**50**|**30**|0.251263287441727|
+|**70**|**10**|0.2519126044142899|
+|**50**|**90**|0.25215961688326183|
+|**10**|**40**|0.25218344612988064|
+|**60**|**90**|0.25624042195836866|
+|**30**|**60**|0.256961442645613|
+|**40**|**70**|0.2601737903367856|
+|**10**|**1**|0.2610052077226626|
+
 
 Se tomó la topología de 20 capas ocultas de 80 neuronas cada una para continuar los experimentos
 
