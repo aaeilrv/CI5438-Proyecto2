@@ -175,7 +175,7 @@ Se probaron estas combinaciones con los siguientes parámetros
 
 En la siguiente gráfica se pueden visualizar los resultados
 
-![la creatura](/graficos\spam\topologias.png "Tasas de error por topología").
+![la creatura](/graficos/spam/topologias.png "Tasas de error por topología").
 
 Los 10 menores errores fueron
 
@@ -196,7 +196,7 @@ Se tomó la topología de 20 capas ocultas de 80 neuronas cada una para continua
 
 Se tomó el modelo obtenido en la sección anterior (con 50 iteraciones de entrenamiento, que no son tomadas en cuenta en esta sección) y sobre este se realizaron 5 sesiones de entrenamiento der 500 iteraciones con las tasas de aprendizaje (0.00001, 0.000005, 0.00002, 0.00003, 0.00006). Se grafica el resultado del entrenamiento total con cada sesión identificada como un segmento específico de la gráfica
 
-![vayalo](/graficos\spam\topologias.png "Tasas de error por iteración con vairas tasas de aprendizaje")
+![vayalo](/graficos/spam/tasas.jpg "Tasas de error por iteración con vairas tasas de aprendizaje")
 
 Se puede observar que para las pruebas hechas aumentar la tasa de aprendizaje resultó en una mejora de los resultados de cada entrenamiento.
 
