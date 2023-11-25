@@ -74,7 +74,7 @@ def clasificacion_multiclase(dataframe, learning_rate, max_iteration, min_error,
         salida = red_neuronal.h(x)[1][-1].flatten()
         salida_normalizada = umbral_multiclase(salida)
 
-        print(f"Entrada: {x.flatten()}, Salida esperada: {y}, Salida de la red: {salida} -> {salida_normalizada}")
+        #print(f"Entrada: {x.flatten()}, Salida esperada: {y}, Salida de la red: {salida} -> {salida_normalizada}")
         
         if not check_error(salida_normalizada, y):
             error += 1
@@ -86,13 +86,12 @@ def clasificacion_multiclase(dataframe, learning_rate, max_iteration, min_error,
     print(f"Falsos positivos: {fp}")
     print(f"Falsos negativos: {fn}")
 
-learning_rate = 0.1
-max_iteration = 10000
+learning_rate = 0.01
+max_iteration = 2000
 min_error = 0.1
-capa_oculta = [4, 1, 3]
+capa_oculta = [4, 5, 3]
 
+print(capa_oculta)
 for i in range(3):
     print(f'\nnum interaciones: {max_iteration}, learning rate: {learning_rate}, min error: {min_error}')
-
-    print("\nMulticlase:")
     clasificacion_multiclase(dataset, learning_rate, max_iteration, min_error, capa_oculta)

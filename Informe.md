@@ -1,4 +1,4 @@
-# 2: Iris Dataset
+# Clasificador de Especies
 ## Clasificadores Binarios
 Se utilizó el dataframe que contiene $150$ entradas en total. Este fue dividido en tres partes:
 * ***iris_setosa***: Valores de Iris Setosa fueron marcados como $1$. Para Iris Versicolor e Iris Virginica fueron marcados como $0$.
@@ -52,9 +52,13 @@ En el caso de la tasa de aprendizaje $0.01$, se decidió hacerla con tres distin
 |**I.Versicolor**|**0.1**|**1000**|57|10|13|11.4|51|6|
 |**I.Virginica**|**0.1**|**1000**|8|1|3|1.6|2|5|
 
-Es claro por estos resultados que con la tasa de aprendizaje entre $0.01$ y $0.1$ se logra obtener menos cantidad de errores en cada una de las categorías.
+![capa-oculta](./graficos/binaria/una_neurona/distintas_iteraciones.png)
 
-(hablar hablar hablar)
+![capa-oculta](./graficos/binaria/una_neurona/distintos_learning_rates.png)
+
+Es claro por estos resultados que con la tasa de aprendizaje $0.1$ se logra obtener menor cantidad de errores en cada una de las categorías. 
+
+Asimismo, vemos por el gráfico que la menor cantidad de errores se presentan con cinco mil y diez mil iteraciones. Esto posible,ente ocurre ya que para el momento del detenimiento del algoritmo, el margen de error entre la iteración previa y la actual no es lo suficientemente pequeño, por ende no se logran mejores resultados.
 
 ### Una Capa Oculta
 Al ver los resultados obtenidos previamente, se decidió optar por sólo dos posibles tasas de aprendizaje: $0.01$ y $0.1$, y conocer los valores resultantes al usar tres cantidades máximas de iteraciones: $1000$, $5000$ y $10000$.
@@ -102,13 +106,25 @@ Debido al tiempo que toma experimentar con mayor cantidad de neuronas en las cap
 |**I.Versicolor**|**0.1** |**5** |**1000** |60 |11 |13 |12 |56 |4 |**5000** |17 |0 |10 |3.4 |17 |0 |**10000** |28 |0 |12 |5.6 |28 |0 |
 |**I.Virginica**|**0.1** |**5** |**1000** |33 |2 |13 |6.6 |31 |2 |**5000** |21 |1 |14 |4.2 |17 |4 |**10000** |6 |0 |3 |1.2 |3 |3 |
 
-(hablar sobre qué representan estos valores y blablabla)
+Para una mejor visualización de los datos, se anexan los siguientes gráficos:
+
+![una_neurona](./graficos/binaria/capa_oculta/Mil-Iter.png)
+
+![una_neurona](./graficos/binaria/capa_oculta/Cinco-Mil-Iter.png)
+
+![una_neurona](./graficos/binaria/capa_oculta/Diez_Mil_Iter.png)
+
+Al igual que en el caso pasado, mientras mayor es la cantidad de iteraciones, mejor es la calidad de los resultados. Además, con la tasa de aprendizaje $0.1$ se siguen obteniendo menos errores. Sin embargo, el margen entre ambos ahora está menos divididos que al haber una sola capa oculta.
+
+Algo curioso que nuevamente se repite es la variación en la cantidad de errores entre cada una de las especies. A pesar de que los tres datasets utilizados están balanceados, para *Iris Setosa* se obtiene una cantidad de errores mucho menor que para las otras dos especies.
+
+También es importante mencionar la diferencia entre la cantidad de falsos negativos y falsos positivos, siendo estos últimos apenas contables. Esto, además, no carga dependencia con la tasa de aprendizaje, cantidad máxima de iteración o especie.
 
 ### Dos Capas Ocultas
 Se utilizaron los siguientes valores:
 * Cantidad máxima de iteraciones: 2000, 5000, 7000
 * Tasas de aprendizaje: 0.01, 0.1
-* Cantidad de neuronas en las capas ocultas: (1, 3), (3, 5), (5, 3), (3, 3), (5, 5)
+* Cantidad de neuronas en las capas ocultas: (1, 3), (3, 5), (5, 3), (3, 3), (5, 5) 
 
 |Especie |Tasa  de  Aprendizaje|Iteraciones|N.  Neu.  Capa  1|N.  Neu.  Capa  2|Total  Err.|E.  Mín|E.  Máx|AVG  E|Falsos  -|Falsos  +|Iteraciones|Total  Err.|E.  Mín|E.  Máx|AVG  E|Falsos  -|Falsos  +|Iteraciones|Total  Err.|E.  Mín|E.  Máx|AVG  E|Falsos  -|Falsos  +|
 |:----------:|:-----------------:|:---------:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -152,9 +168,62 @@ Se utilizaron los siguientes valores:
 |**I.Versicolor**|**0.1** |**2000** |**5** |**5** |35 |11 |13 |11.6 |35 |0 |**5000** |23 |1 |12 |7.6 |23 |0 |**7000** |26 |1 |14 |8.6 |26 |0 |
 |**I.Virginica**|**0.1** |**2000** |**5** |**5** |24 |2 |11 |8 |24 |0 |**5000** |5 |1 |2 |1.6 |3 |2 |**7000** |27 |3 |13 |9 |27 |0 |
 
-(hablar owo)
+![dos_ocultas](./graficos/binaria/dos_capas_ocultas/Dos_Mil_Iter.png)
+
+![dos_ocultas](./graficos/binaria/dos_capas_ocultas/Cinco_Mil_Iter.png)
+
+![dos_ocultas](./graficos/binaria/dos_capas_ocultas/Siete_Mil_Iter.png)
+
+A pesar de haber obtenido mejores resultados previamente con 10000 iteraciones, se decidió bajar la cantidad de las mismas para elaborar una comparación y ver si las dos capas ocultas favorecían la disminución de iteraciones.
+
+Aunque el patrón de obtener mejores resultados con mayor cantidad de iteraciones se sigue repitiendo, es importante mencioanr que, en este caso, la cantidad de errores obtenidas (para ambas tasas de aprendizaje y todas las cantidades de iteraciones evaluadas) disminuyó aproximadamente unos 20 puntos, estando la media entre los 20 y 30 errores por especie, y la mayor cantidad de errores rodeando los 40. 
+
+Nuevamente, los resultados con tasa de aprendizaje $0.1$ siguen siendo mejores. Sin embargo, para la especie *iris versicolor* la variación en su cantidad de errores no es tan grande como para las otras especies.
+
+*Iris Setosa* sigue siendo la especie con menor cantidad de errores, estando esta en varias ocasiones muy por debajo de las otras dos.
 
 ## Clasificadores Multiclase
+
+Para la creación de estos clasificadores, se utilizaron los $dummy$ de $Pandas$. De esta manera, se crearon tres nuevas columnas con valores binarios para cada una de las especies que constituían el dataset original.
+
+Al igual que en el caso pasado, se optó por utilizar las tasas de aprendizaje $0.01$ y $0.1$, tanto en 2000 como 5000 iteraciones.
+
+Tal como menciona el enunciado, se utilizó tanto una capa oculta como dos. Para la cantidad de neuronas de la única capa oculta, se tomó el intervalo $1-5$, mientras que para el caso de las dos capas ocultas, se tomaron los siguientes valores: $(1, 3)$, $(3, 3)$, $(5, 5)$, $(3, 5)$.
+
+Es necesario mencionar que el cálculos de los falsos negativos y falsos positivos no se pudo realizar correctamente, y por cuestión de tiempo límite de entrega, no pudo ser acomodado.
+
+A continuación, se presentan los valores dados:
+
+|Tasa de Aprendizaje|Iteraciones|Neu. En Capa|Total Err.|E. Mín|E. Máx|AVG E|Falsos -|Falsos +|
+|-------------------|-----------|------------|----------|------|------|-----|--------|--------|
+|0.01               |2000       |1           |58        |17    |23    |19.3 |-       |-       |
+|0.01               |2000       |2           |60        |17    |22    |20   |-       |-       |
+|0.01               |2000       |3           |22        |5     |10    |7.3  |-       |-       |
+|0.01               |2000       |4           |65        |13    |27    |21.6 |-       |-       |
+|0.01               |2000       |5           |69        |22    |25    |23   |-       |-       |
+|                   |           |            |          |      |      |     |        |        |
+|0.1                |2000       |1           |38        |2     |26    |12.6 |-       |-       |
+|0.1                |2000       |2           |20        |2     |12    |6.6  |-       |-       |
+|0.1                |2000       |3           |15        |0     |12    |5    |-       |-       |
+|0.1                |2000       |4           |24        |0     |13    |8    |-       |-       |
+|0.1                |2000       |5           |2         |0     |1     |0.6  |-       |-       |
+
+![multiclase](./graficos/multiclase/UnaCapa.png)
+
+![multiclase](./graficos/multiclase/DosCapas.png)
+
+Una vez más, la tasa de error $0.1$ sigue siendo aquella que produce mejores resultados, tanto para el caso de una capa oculta como para dos. Esta vez, la diferencia entre ambas es bastante notoria, pues con $0.01$ la cantidad de errores sondea los 60, mientras que con $0.1$ se promedia en 30.
+
+### Comparación con los clasificadores binarios
+
+### Comparación con los clasificadores binarios
+Al comparar el rendimiento, los resultados obtenidos por el clasificador multiclase a las dos mil iteraciones con la tasa de aprendizaje $0.01$ (tanto con una capa oculta como en dos), se asemejan a los resultados de los clasificadores binarios con una capa oculta entre las mil y cinco mil iteraciones. Sin embargo, debemos recordar que, en esos casos, la cantidad de errores fue medida por cada una de las especies, mientras que acá la cantidad de errores abarca las tres especies en total. Por ende, sería una menor cantidad de errores por cada especie.
+
+Asimismo, con los clasificadores multiclase utilizando la tasa de aprendizaje $0.1$ a 2000 iteraciones, fue que se obtuvo los mejores resultados de todos los experimentos. 
+
+Aún así, esto no significa que uno de los clasificadores sea mejor que otro, sino que están destinados para causas distintas. Para el caso de una clasificación que va más allá de un *pertenece* o *no pertenece*, es mejor utilizar clasificadores multiclase, mientras que para esos casos donde la evaluación es simplemente un *sí* o *no*, los clasificadores binarios son los indicados.
+
+Dicho esto, para poder realizar una mejor comparación es necesario hacer más pruebas, especialmente con más cantidades máximas de iteraciones para los clasificadores multiclase.
 
 # 3:  Clasificación de spam
 
