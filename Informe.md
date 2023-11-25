@@ -155,3 +155,49 @@ Se utilizaron los siguientes valores:
 (hablar owo)
 
 ## Clasificadores Multiclase
+
+# 2:  Clasificación de spam
+
+Para el clasificador de spam se normalizaron los datos de las últimas 3 columnas de entrada,  capital_run_length_average, capital_run_length_longest y capital_run_length_total
+
+Se dividieron los experimentos en 2 partes, experimentos de topologías y experimentos de tasa de aprendizaje
+
+## Topologías
+
+Se probó con distintas combinaciones de profundidades y anchos homogéneos de capas internas en intervalos de 10. Es decir
+
+```[1, 10, 20, 30, 40, 50, 60] capas internas x [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] neuronas por capa interna```
+
+Se probaron estas combinaciones con los siguientes parámetros
+
+* Iteraciones: 50 
+* Tasa de aprendizaje: 0.00001
+
+En la siguiente gráfica se pueden visualizar los resultados
+
+![la creatura](/graficos\spam\topologias.png "Tasas de error por topología").
+
+Los 10 menores errores fueron
+
+* d20_w80   0.24188783454962035
+* d40_w20   0.2500841894396112
+* d50_w30   0.251263287441727
+* d70_w10   0.2519126044142899
+* d50_w90   0.25215961688326183
+* d10_w40   0.25218344612988064
+* d60_w90   0.25624042195836866
+* d30_w60   0.256961442645613
+* d40_w70   0.2601737903367856
+* d10_w1    0.2610052077226626
+
+Se tomó la topología de 20 capas ocultas de 80 neuronas cada una para continuar los experimentos
+
+## Tasas de aprendizaje
+
+Se tomó el modelo obtenido en la sección anterior (con 50 iteraciones de entrenamiento, que no son tomadas en cuenta en esta sección) y sobre este se realizaron 5 sesiones de entrenamiento der 500 iteraciones con las tasas de aprendizaje (0.00001, 0.000005, 0.00002, 0.00003, 0.00006). Se grafica el resultado del entrenamiento total con cada sesión identificada como un segmento específico de la gráfica
+
+![vayalo](/graficos\spam\topologias.png "Tasas de error por iteración con vairas tasas de aprendizaje")
+
+Se puede observar que para las pruebas hechas aumentar la tasa de aprendizaje resultó en una mejora de los resultados de cada entrenamiento.
+
+la tasa de error final conseguida en el entrenamiento fue de 0.2387
