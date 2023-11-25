@@ -116,9 +116,24 @@ def train_model():
     #500            0.00006
 
 
+def graph_training():
+    rates = [0.00001, 0.000005, 0.00002, 0.00003, 0.00006]
 
+    it = 0
+    for i in range(len(rates)):
+        err_file = open(f"spam_train/err{str(i+2)}.txt", "r")
+        err =json.loads(err_file.read())
+        err_file.close()
+
+        p.plot([e for e in range(it, it+len(err))], err, label=f"tasa {int(rates[i]*1000000)}e-6")
+
+        it += len(err)
+
+    p.legend()
+    p.show()
 
 
 #test_topologies()
-train_model()
+#train_model()
 #graph_topologies()
+graph_training()
