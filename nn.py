@@ -43,7 +43,7 @@ class NN(object):
         E = 0
         for ex in examples:
             E += (self.h(ex[0])[1][-1] - ex[1])**2
-        return E[0]/len(examples)
+        return E[0,0]/len(examples)
     
     #funcion que calcula el gradiente de los pesos de la red en base a un
     #valor de entrada X y un valor de salida Y, utilizando la funcion de error
@@ -96,7 +96,7 @@ class NN(object):
     #funcion que guarda el modelo actual en un archivo de texto
     def save_weights(self, filename):
         file = open(f"{filename}.txt", "w")
-        data = {"weights":self.weights, "biases": self.biases}
+        data = {"weights":[ i.tolist() for i in self.weights], "biases": [i.tolist() for i in self.biases]}
         file.write(json.dumps(data))
         file.close()
 
@@ -104,6 +104,6 @@ class NN(object):
     def load_weights(self, filename):
         file = open(f"{filename}.txt", "r")
         data = json.loads(file.read())
-        self.weights = data.weights
-        self.biases = data.biases
+        self.weights = [np.array(i) for i in data["weights"]]
+        self.biases = [np.array(i) for i in data["biases"]]
         file.close()
